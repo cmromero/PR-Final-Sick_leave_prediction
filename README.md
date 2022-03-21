@@ -3,7 +3,7 @@
 # Predicción de bajas laborales
 *Carlos Romero*
 
-*Data0921, Barcelona, 21/03/2022*
+*Data0921, Barcelona, 2022-03-21*
 
 ## Content
 - [Project Description](#project-description)
@@ -36,9 +36,9 @@ El objetivo de este proyecto es el de obtener una previsión de la plantilla de b
 El dataset utilizado en este proyecto ha sido creado utilizando los siguientes recursos:
 * Datos internos privados del ICS: datos de absentismo y contratación. Se ha llevado a cabo un proceso de generación y agregación de los datos para disponer de un dataset de 2400 registros con información mensual desde el año 2003 (anteriormente se usaba otro programa y no hay registros históricos)
 * Datos externos públicos: 
-- Para los casos covid se ha usado un dataset disponible en el web de dades obertes de Catalunya y se ha usado la API de Socrata para automatizar la actualización de datos.
-- Para las búsquedas en google de términos relacionados con la gripe se ha usado la API no oficial de Google Trends llamada pytrends. 
-- Para estimar los datos a futuro de casos covid se han importado los datos publicados en https://x-y.es/covid19/sudafrica.pais
+	- Para los casos covid se ha usado un [dataset disponible](https://analisi.transparenciacatalunya.cat/Salut/Registre-de-casos-de-COVID-19-a-Catalunya-per-rea-/xuwf-dxjd) en la web de dades obertes de Catalunya y se ha usado la API de Socrata para automatizar la actualización de datos.
+	- Para las búsquedas en google de términos relacionados con la gripe se ha usado la API no oficial de Google Trends llamada pytrends. 
+	- Para estimar los datos a futuro de casos covid se han importado los datos publicados en [x-y.es](https://x-y.es/covid19/sudafrica.pais).
 
 ## Cleaning
 Describe your full process of data wrangling and cleaning. Document why you chose to fill missing values, extract outliers, or create the variables you did as well as your reasoning behind the process.
