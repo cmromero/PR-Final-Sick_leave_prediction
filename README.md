@@ -1,13 +1,14 @@
 <img src="https://bit.ly/2VnXWr2" alt="Ironhack Logo" width="100"/>
 
-# Title of My Project
-*[Your Name]*
+# Predicción de bajas laborales
+*Carlos Romero*
 
-*[Your Cohort, Campus & Date]*
+*Data0921, Barcelona, 21/03/2022*
 
 ## Content
 - [Project Description](#project-description)
 - [Hypotheses / Questions](#hypotheses-questions)
+- [Contexto](#contexto)
 - [Dataset](#dataset)
 - [Cleaning](#cleaning)
 - [Analysis](#analysis)
@@ -19,19 +20,25 @@
 - [Links](#links)
 
 ## Project Description
-Write a short description of your project: 3-5 sentences about what your project is about, why you chose this topic (if relevant), and what you are trying to show.
+El objetivo de este proyecto es el de obtener una previsión de la plantilla de baja laboral hasta final de año de un hospital público. Por falta de tiempo se ha limitado la predicción al colectivo de diplomados/as de enfermería.  
 
 ## Hypotheses / Questions
-* What data/business/research/personal question you would like to answer?
-* What is the context for the question and the possible scientific or business application?
-* What are the hypotheses you would like to test in order to answer your question?  
-Frame your hypothesis with statistical/data languages (i.e. define Null and Alternative Hypothesis). You can use formulas if you want but that is not required.
+* ¿Cuál será la evolución de las bajas laborales del personal de enfermería hasta final de año?
+* ¿Qué coste supondría para el Hospital cubrir la totalidad de las bajas con contrataciones de sustitución directa?
+* ¿En relación al presupuesto de sustituciones para bajas laborales de enfermas faltará dinero o sobrará? ¿Cuánto dinero sobrará o faltará?
+
+## Contexto
+* Tanto la variable de bajas laborales como la variable de plantilla se expresan en plantilla equivalente. La plantilla equivalente se calcula dividiendo los días contratados del mes (o días de baja) partido por los días naturales del mes y multiplicado por la proporción de jornada (completa = 100%).
+* Se ha estimado que el presupuesto asignado a la bolsa de sustituciones para el personal de enfermería de este año es de 1.888.965,73€
+* Se ha estimado que el coste medio de la cobertura de 1 enfermera durante un mes de baja es de 2.513,58
 
 ## Dataset
-* Where did you get your data? If you downloaded a dataset (either public or private), describe where you downloaded it and include the command to load the dataset.
-* Did you build your own datset? If so, did you use an API or a web scraper? PRovide the relevant scripts in your repo.
-* For all types of datasets, provide a description of the size, complexity, and data types included in your dataset, as well as a schema of the tables if necessary.
-* If the question cannot be answered with the available data, why not? What data would you need to answer it better?
+El dataset utilizado en este proyecto ha sido creado utilizando los siguientes recursos:
+* Datos internos privados del ICS: datos de absentismo y contratación. Se ha llevado a cabo un proceso de generación y agregación de los datos para disponer de un dataset de 2400 registros con información mensual desde el año 2003 (anteriormente se usaba otro programa y no hay registros históricos)
+* Datos externos públicos: 
+- Para los casos covid se ha usado un dataset disponible en el web de dades obertes de Catalunya y se ha usado la API de Socrata para automatizar la actualización de datos.
+- Para las búsquedas en google de términos relacionados con la gripe se ha usado la API no oficial de Google Trends llamada pytrends. 
+- Para estimar los datos a futuro de casos covid se han importado los datos publicados en https://x-y.es/covid19/sudafrica.pais
 
 ## Cleaning
 Describe your full process of data wrangling and cleaning. Document why you chose to fill missing values, extract outliers, or create the variables you did as well as your reasoning behind the process.
@@ -67,6 +74,5 @@ What does your repository look like? Explain your folder and file structure.
 Include links to your repository, slides and trello/kanban board. Feel free to include any other links associated with your project.
 
 
-[Repository](https://github.com/)  
-[Slides](https://slides.com/)  
-[Trello](https://trello.com/en)  
+[Repository](https://github.com/cmromero/PR-Final-Sick_leave_prediction)  
+[Slides](https://docs.google.com/presentation/d/1LLYgpm1lkzQl7cDWJNk5t0_gg0AmX-AkXVuehJzQJeU/edit?usp=sharing) 
