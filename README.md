@@ -3,7 +3,7 @@
 # Predicción de bajas laborales
 *Carlos Romero*
 
-*Data0921, Barcelona, 2022-03-21*
+*Data0921, Barcelona, 2022-03-23*
 
 ## Content
 - [Project Description](#project-description)
@@ -15,7 +15,6 @@
 - [Model Training and Evaluation](#model-training-and-evaluation)
 - [Conclusion](#conclusion)
 - [Future Work](#future-work)
-- [Workflow](#workflow)
 - [Organization](#organization)
 - [Links](#links)
 
@@ -64,29 +63,39 @@ El dataset utilizado en este proyecto ha sido creado utilizando los siguientes r
 * Feature importance: se procede a calcular la importancia que tiene cada variable independiente para predecir el valor de la variable objetivo. Para ello se usa el método de regresión de Random Forest usando los datos históricos como set de entrenamiento y se llama a la propiedad feature_importance. Se observa que las 3 variables más importantes son: Casos covid (0.41), Plantilla (0.35) y búsquedas en google (0.13).
 
 ## Grid Search and Evaluation
-*Include this section only if you chose to include ML in your project.*
-* Describe how you trained your model, the results you obtained, and how you evaluated those results.
+Se ha decidido predecir la variable objetivo mediante un modelo de predicción de series temporales. Se ha probado con el método Arima y con FbProphet. Se han definido dos funciones para hallar el modelo con los mejores parámetros y variables con los siguientes componentes:
+* Iterar cada test de modelo con cada combinación posible de variables independientes.
+* Autoarima en la función de Arima para encontrar los mejores parámetros en cada iteración
+* Evaluar cada modelo en función del Error Cuadrático Medio en Porcentaje.
+Los resultados nos dicen que los mejores modelos deben introducir los datos a futuro de las variables exógenas y de las 5 que tenemos:
+* Normativa: sabemos que será 0.
+* Festivos intersemanales: sabemos cuántos días tendrá cada mes gracias a visualizar el [calendario laboral de Badalona](https://www.elperiodico.com/es/economia/20211014/calendario-laboral-festivos-badalona-2022-12252155)
+* Plantilla: es estacionaria y, por tanto, se predicen los valores mediante modelo de series temporales (FbProphet es el que presenta un error menor).
+* Búsquedas Google: es estacionaria y, por tanto, se predicen los valores mediante modelo de series temporales (Sarimax es el que presenta un error menor).
+* Casos Covid: no es estacionaria y, por tanto, no se puede predecir mediante modelos de series temporales. Se decide predecir tomando como referencia la evolución de casos covid en Sudáfrica por ser este país el primero en sufrir la ola de la variante Omicron. De todas formas, se decide crear 2 modelos: uno teniendo en cuenta la variable covid y otro sin.
 
 ## Conclusion
-* Summarize your results. What do they mean?
-* What can you say about your hypotheses?
-* Interpret your findings in terms of the questions you try to answer.
+* Con el modelo 1 (teniendo en cuenta la variable covid) se estima que la plantilla acumulada que estará de baja laboral es 622,34. Esto podría suponer un coste de cobertura de hasta 1.564.309€. Con la partida presupuestaria destinada a este efecto si se decidiese cubrir la totalidad de las bajas aún sobraría 342.656€.
+* Con el modelo 2 (sin tener en cuenta la variable covid) se estima que la plantilla acumulada que estará de baja laboral es 674,65. Esto podría suponer un coste de cobertura de hasta 1.695.776€. Con la partida presupuestaria destinada a este efecto si se decidiese cubrir la totalidad de las bajas aún sobraría 193.189€.
+* La diferencia de un modelo al otro se debe a que el modelo con la variable covid sabe que los casos covid afectan a las bajas laborales y, como los datos a futuro le dicen que los casos bajarán y se mantendrán al mínimo, predice que las bajas laborales serán inferiores y con ligera variabilidad. En cambio, en el otro modelo no se da esa información y el modelo deduce que la evolución de las bajas será similar a la de los últimos meses. Es decir, subidas y bajadas abruptas (siguiendo por eso la tendencia estacionaria).
 
 ## Future Work
-Address any questions you were unable to answer, or any next steps or future extensions to your project.
-
-## Workflow
-Outline the workflow you used in your project. What were the steps?
-How did you test the accuracy of your analysis and/or machine learning algorithm?
+* Sería conveniente replicar los pasos de este proyecto a todas las categorías profesionales del hospital y habría automatizar el entrenamiento del modelo y la predicción de los datos. Al acercarse a final de año el espacio de predicción será menor y los resultados se cree que serán mejores.
+* Sería interesante incorporar una fórmula que puede predecir la evolución de los casos covid a futuro.
+* Se podría intentar añadir otra variable con información del clima mensual para mejorar los resultados de los modelos.
 
 ## Organization
-How did you organize your work? Did you use any tools like a trello or kanban board?
-
-What does your repository look like? Explain your folder and file structure.
+* Todos los recursos se encuentran en la rama “main”.
+* El código Python con todos los pasos seguidos se encuentra en la carpeta raíz del directorio en los siguientes notebooks de jupyter:
+	* Proyecto_Final_EDA.ipynb
+	* Proyecto_Final_Model_Enfermeria.ipynb
+	* Proyecto_Final_Predicciones-exogenas_con_covid.ipynb
+	* Proyecto_Final_Predicciones-exogenas_sin_covid.ipynb
+* Carpeta data/ => datasets generales
+* Carpeta models/ => modelos exportados
+* Carpeta output/ => datasets específicos para cada categoría profesional.
 
 ## Links
-Include links to your repository, slides and trello/kanban board. Feel free to include any other links associated with your project.
-
 
 [Repository](https://github.com/cmromero/PR-Final-Sick_leave_prediction)  
 [Slides](https://docs.google.com/presentation/d/1LLYgpm1lkzQl7cDWJNk5t0_gg0AmX-AkXVuehJzQJeU/edit?usp=sharing) 
